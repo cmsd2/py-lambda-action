@@ -6,10 +6,6 @@ inputs:
     description: the dir in which the code lives
     required: true
     default: '.'
-  out_dir:
-    description: the dir to use to assemble the zip contents
-    required: true
-    default: 'out'
   out_file:
     description: the file path to use for the resulting zip
     required: true
@@ -25,7 +21,6 @@ runs:
     - ${{ inputs.requirements_txt }}
     - ${{ inputs.code_dir }}
     - ${{ inputs.out_file }}
-    - ${{ inputs.out_dir }}
 branding:
   icon: 'layers'
   color: 'yellow'

@@ -17,11 +17,9 @@ In order for the Action to have access to the code, you must use the `actions/ch
 
 ### Inputs
 - `code_dir`
-    The path to your python  code. Defaults to `.`.
+    The path to your python code. Defaults to `.`. Dependencies will be installed inside a dir called `python`.
 - `out_file`
     The file path to use for the resulting zip. Defaults to `./lambda.zip`.
-- `out_dir`
-    The dir to use to assemble the zip contents. Defaults to `./out`.
 - `requirements_txt`
     The name/path for the `requirements.txt` file. Defaults to `requirements.txt`.
 
