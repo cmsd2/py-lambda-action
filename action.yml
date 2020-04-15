@@ -1,24 +1,30 @@
-name: Py Lambda Deploy
-author: Mariam Maarouf
-description: Deploy python code to AWS Lambda with dependencies in a separate layer.
+name: Py Lambda Build
+author: Chris  Dawes
+description: Build python code into a zip for AWS Lambda
 inputs:
+  code_dir:
+    description: the dir in which the code lives
+    required: true
+    default: '.'
+  out_dir:
+    description: the dir to use to assemble the zip contents
+    required: true
+    default: 'out'
+  out_file:
+    description: the file path to use for the resulting zip
+    required: true
+    default: 'lambda.zip'
   requirements_txt:
-    description: the name/path to the requirements.txt file
+    description: the name/path of the requirements.txt file in the code dir
     required: true
     default: 'requirements.txt'
-  lambda_layer_arn:
-    description: The ARN for the Lambda layer the dependencies should be pushed to without the version (every push is a new version).
-    required: true
-  lambda_function_name:
-    description: The Lambda function name. Check the AWS docs/readme for examples.
-    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.requirements_txt }}
-    - ${{ inputs.lambda_layer_arn }}
-    - ${{ inputs.lambda_function_name }}
+    - ${{ inputs.code_dir }}
+    - ${{ inputs.out_file }}
 branding:
   icon: 'layers'
   color: 'yellow'

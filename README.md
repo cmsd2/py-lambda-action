@@ -2,10 +2,11 @@
 
 [![GitHubActions](https://img.shields.io/badge/listed%20on-GitHubActions-blue.svg)](https://github-actions.netlify.com/py-lambda)
 
-A Github Action to deploy AWS Lambda functions written in Python with their dependencies in a separate layer. For now, only works with Python 3.6. PRs welcome.
+A Github Action to build AWS Lambda functions written in Python with their dependencies in a separate layer. For now, only works with Python 3.6. PRs welcome.
 
 ## Use
-Deploys everything in the repo as code to the Lambda function, and installs/zips/deploys the dependencies as a separate layer the function can then immediately use.
+Produces a zip file suitable for deploying to AWS Lambda.
+Works well with AWS CDK, Terraform etc.
 
 ### Pre-requisites
 In order for the Action to have access to the code, you must use the `actions/checkout@master` job before it. See the example below.
@@ -14,22 +15,15 @@ In order for the Action to have access to the code, you must use the `actions/ch
 - Lambda code should be structured normally/as Lambda would expect it.
 - **Dependencies must be stored in a `requirements.txt`** or a similar file (provide the filename explicitly if that's the case).
 
-### Environment variables
-Stored as secrets or env vars, doesn't matter. But also please don't put your AWS keys outside Secrets.
-- **AWS Credentials**  
-    That includes the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, etc. It's used by `awscli`, so the docs for that [can be found here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html).
-
 ### Inputs
-- `lambda_layer_arn`  
-    The ARN for the Lambda layer the dependencies should be pushed to **without the version** (every push is a new version).
-- `lambda_function_name`  
-    The Lambda function name. [From the AWS docs](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-code.html), it can be any of the following:
-    - Function name - `my-function`  
-    - Function ARN - `arn:aws:lambda:us-west-2:123456789012:function:my-function`  
-    - Partial ARN - `123456789012:function:my-function`
+- `code_dir`
+    The path to your python  code. Defaults to `.`.
+- `out_file`
+    The file path to use for the resulting zip. Defaults to `./lambda.zip`.
+- `out_dir`
+    The dir to use to assemble the zip contents. Defaults to `./out`.
 - `requirements_txt`
     The name/path for the `requirements.txt` file. Defaults to `requirements.txt`.
-
 
 ### Example workflow
 ```yaml
