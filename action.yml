@@ -25,6 +25,7 @@ runs:
     - ${{ inputs.requirements_txt }}
     - ${{ inputs.code_dir }}
     - ${{ inputs.out_file }}
+    - ${{ inputs.out_dir }}
 branding:
   icon: 'layers'
   color: 'yellow'
