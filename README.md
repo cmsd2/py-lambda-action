@@ -17,7 +17,7 @@ In order for the Action to have access to the code, you must use the `actions/ch
 
 ### Inputs
 - `code_dir`
-    The path to your python code. Defaults to `.`. Dependencies will be installed inside a dir called `python`.
+    The path to your python code. Defaults to `.`.
 - `out_file`
     The file path to use for the resulting zip. Defaults to `./lambda.zip`.
 - `requirements_txt`
@@ -37,5 +37,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Deploy code to Lambda
-      uses: cmsd2/py-lambda-action@v1.0.0
+      uses: cmsd2/py-lambda-action@v1.0.1
+      with:
+        code_dir: .
+        out_file: lambda.zip
 ```
