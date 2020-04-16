@@ -13,7 +13,7 @@ In order for the Action to have access to the code, you must use the `actions/ch
 
 ### Structure
 - Lambda code should be structured normally/as Lambda would expect it.
-- **Dependencies must be stored in a `requirements.txt`** or a similar file (provide the filename explicitly if that's the case).
+- **Dependencies must be stored in a `Pipfile.lock` or `requirements.txt`** or a similar file (provide the filename explicitly if that's the case). If a `Pipfile.lock` file exist it will be used. If not, the `requirements.txt` file will be used.
 
 ### Inputs
 - `code_dir`

@@ -9,7 +9,15 @@ build_zip(){
 	test -f "${OUT_FILE}" && rm "${OUT_FILE}"
 
 	cd "${CODE_DIR}"
-	pipenv install -r "${INPUT_REQUIREMENTS_TXT}"
+	
+	if [ -f "Pipfile.lock" ]; then
+	    pipenv install --deploy
+	else
+	    if [ -f "${INPUT_REQUIREMENTS_TXT}" ]; then
+		    pipenv install -r "${INPUT_REQUIREMENTS_TXT}"
+		fi
+	fi
+
 	VENV_DIR=`pipenv --venv`
 	LIB_SITE_PACKAGES="${VENV_DIR}/lib/${PYTHON}/site-packages"
 	LIB64_SITE_PACKAGES="${VENV_DIR}/lib64/${PYTHON}/site-packages"
